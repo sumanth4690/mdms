@@ -16,17 +16,17 @@ import {
 const sideMenu = [
 	{name: 'Dashboard', path: '/', icon: HomeDashboard},
 	{name: 'HES', path: 'hes-dashboard', icon: HesDashboard},
-	{
-		name: 'Prepaid',
-		icon: Prepaid,
-		path: 'prepaid',
-	},
+	// {
+	// 	name: 'Prepaid',
+	// 	icon: Prepaid,
+	// 	path: 'prepaid',
+	// },
 	{
 		name: 'Customers',
 		icon: CustomersHome,
 		path: 'customers',
 		children: [
-			{name: 'Add Customer', icon: AddUser, path: 'customers/add'},
+			// {name: 'Add Customer', icon: AddUser, path: 'customers/add'},
 			{
 				name: 'Customers List',
 				icon: CustomerTable,
@@ -39,21 +39,21 @@ const sideMenu = [
 		icon: MetersHome,
 		path: 'meters',
 		children: [
-			{name: 'Add Meter', icon: AddUser, path: 'meters/add'},
+			// {name: 'Add Meter', icon: AddUser, path: 'meters/add'},
 			{name: 'Deployed Meters', icon: MeterTable, path: 'meters'},
 			{
 				name: 'Meter Data',
 				icon: MeterData,
 				path: 'meters/data?phase=single-phase',
 			},
-			{
-				name: 'Allocate Meter',
-				icon: MeterAssign,
-				path: 'meters/allocate',
-			},
+			// {
+			// 	name: 'Allocate Meter',
+			// 	icon: MeterAssign,
+			// 	path: 'meters/allocate',
+			// },
 		],
 	},
-	{name: 'Grids', path: 'grids', icon: Grids},
+	// {name: 'Grids', path: 'grids', icon: Grids},
 	{name: 'Tampers', path: 'tampers', icon: Tampers},
 	{
 		name: 'Geographic Info System ',

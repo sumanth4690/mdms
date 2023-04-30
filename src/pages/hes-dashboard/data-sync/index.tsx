@@ -126,7 +126,7 @@ const MeterDataSyncGraph = ({ phase }) => {
 						className="meter-data-navigation-2"
 						sx={{ padding: '0px 16px' }}
 					>
-						<Tab label='Instantaneous data' {...a11yProps(0)} />
+						{/* <Tab label='Instantaneous data' {...a11yProps(0)} /> */}
 						<Tab label='Block load data' {...a11yProps(1)} />
 						<Tab label='Daily load data' {...a11yProps(2)} />
 					</Tabs>

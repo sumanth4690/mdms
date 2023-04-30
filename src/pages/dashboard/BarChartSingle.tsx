@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { withTheme } from "styled-components/macro";
 import Chart from "react-chartjs-2";
 import { MoreVertical } from "react-feather";
@@ -38,11 +38,21 @@ const ChartWrapper = styled.div`
 const BarChartSingle = ({ theme }) => {
   const firstDatasetColor = '#407ddd';
   const secondDatasetColor = '#dee2e6';
+  const [ Last30DaysActiveMetersSingle, setLast30DaysActiveMetersSingle ] = useState<any>('')
 
-  const { data, isLoading, error } = useQuery(
-    'last30DaysActiveMetersSingle',
-    fetchLast30DaysActiveMetersSingle
-  )
+  // const { data, isLoading, error } = useQuery(
+  //   'last30DaysActiveMetersSingle',
+  //   fetchLast30DaysActiveMetersSingle
+  // )
+
+  useEffect(()=>{
+		getLast30DaysActiveMetersSingle()
+	},[])
+
+	const getLast30DaysActiveMetersSingle = async () => {
+		const res = await fetchLast30DaysActiveMetersSingle()
+		setLast30DaysActiveMetersSingle(res)
+	}
   //console.log(data?.data?.data?.countDistinct.meter_serial_number);
 //console.log(data);
     const {
@@ -52,7 +62,7 @@ const BarChartSingle = ({ theme }) => {
     } = useQuery('fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle',fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle);
 
 
-  const values = data?.data?.data?.map((item) =>
+  const values = Last30DaysActiveMetersSingle?.data?.data?.map((item) =>
     (`${item.countDistinct.meter_serial_number}`)
   )
 
@@ -64,7 +74,7 @@ const BarChartSingle = ({ theme }) => {
 
 // console.log(values);
   const arr=[];
-  const xaxis = data?.data?.data?.map((item) =>{
+  const xaxis = Last30DaysActiveMetersSingle?.data?.data?.map((item) =>{
     arr.push(`${item.source_timestamp_day}/${item.source_timestamp_month}/${item.source_timestamp_year}`);
    //`${item.source_timestamp_day}/${item.source_timestamp_month}/${item.source_timestamp_year}`
 

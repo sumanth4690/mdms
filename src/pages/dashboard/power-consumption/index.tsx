@@ -63,7 +63,7 @@ const Day = ({phase}) => {
 	} = useQuery('datetime', fetchLatestTimeForPowerConsumption)
 	// console.log("latest time for power consumption",latestTime)
 	
-	const date = latestTime?.data?.data[0].server_date_time
+	const date = latestTime?.data?.data[0]?.server_date_time
 	const addedDate = add(new Date(date), {
 		hours: 5,
 		minutes: 30,

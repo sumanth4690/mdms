@@ -37,12 +37,20 @@ console.log(state.year); */
 // console.log("aabhsdfsjd",data)
 // console.log('Monthly Single'+data);
 
-const {
-	data:resTime,
-	isLoading: loading1,
-	error: error1
-} = useQuery('fetchLatestTimeForPowerConsumptionMonthlyAndYearlySingle',fetchLatestTimeForPowerConsumptionMonthlyAndYearlySingle);
+// const {
+// 	data:resTime,
+// 	isLoading: loading1,
+// 	error: error1
+// } = useQuery('fetchLatestTimeForPowerConsumptionMonthlyAndYearlySingle',fetchLatestTimeForPowerConsumptionMonthlyAndYearlySingle);
+const [ LatestTimeForPowerConsumptionMonthlyAndYearlySingle, setLatestTimeForPowerConsumptionMonthlyAndYearlySingle ] = useState<any>('')
+useEffect(()=>{
+	getLatestTimeForPowerConsumptionMonthlyAndYearlySingle()
+},[])
 
+const getLatestTimeForPowerConsumptionMonthlyAndYearlySingle = async () => {
+	const res = await fetchLatestTimeForPowerConsumptionMonthlyAndYearlySingle()
+	setLatestTimeForPowerConsumptionMonthlyAndYearlySingle(res)
+}
 	useEffect(() => {
 		mutate({ month: state.month, year: state?.year })
 	}, [])
@@ -85,16 +93,16 @@ if(typeof values1 != 'undefined' ){
 	}
 
 	const Card = styled(MuiCard)(spacing);
-	const {
-		data: latestTime,
-		error: error4,
-		isLoading: loading4,
-	  } = useQuery('datetime', fetchLatestDateTimeForDataSync)
-	const date = latestTime?.data?.data[0].server_date_time
-	const addedDate = add(new Date(date), {
-	  hours: 5,
-	  minutes: 30,
-	})
+	// const {
+	// 	data: latestTime,
+	// 	error: error4,
+	// 	isLoading: loading4,
+	//   } = useQuery('datetime', fetchLatestDateTimeForDataSync)
+	// const date = latestTime?.data?.data[0].server_date_time
+	// const addedDate = add(new Date(date), {
+	//   hours: 5,
+	//   minutes: 30,
+	// })
 
 	const CardContent = styled(MuiCardContent)`
 	  &:last-child {
@@ -157,7 +165,7 @@ if(typeof values1 != 'undefined' ){
 						</Button>
 					</form>
 					<Typography variant="caption">
-						<Grid className="prepaidtimeclass" pt={1}><AccessAlarmIcon className="alarmicon" />{''}{resTime}</Grid>
+						<Grid className="prepaidtimeclass" pt={1}><AccessAlarmIcon className="alarmicon" />{''}{LatestTimeForPowerConsumptionMonthlyAndYearlySingle}</Grid>
 					</Typography>
 				</Grid>
 			</Grid> 

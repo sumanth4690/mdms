@@ -89,24 +89,24 @@ const DoughnutChartSingle = ({ theme }) => {
 	const [state, setState] = useState<{ year: number | string }>({
 		year: new Date().getFullYear(),
 	})
-	const [latestTime, setLatestTime] = useState('')
+	// const [latestTime, setLatestTime] = useState('')
 	const {
 		data: res,
 		isLoading,
 		mutate,
 	} = useMutation('powerConsumptionTillEndOfYear', fetchPowerConsumptionByYearSingle)
 
-	useEffect(() => {
-		getLatestTime()
-		mutate({
-			year: state.year,
-		})
-	}, [])
+	// useEffect(() => {
+	// 	getLatestTime()
+	// 	mutate({
+	// 		year: state.year,
+	// 	})
+	// }, [])
 
-	const getLatestTime = async () => {
-		const res = await fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle()
-		setLatestTime(res)
-	}
+	// const getLatestTime = async () => {
+	// 	const res = await fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle()
+	// 	setLatestTime(res)
+	// }
 
 	const {
 		data: resTime,

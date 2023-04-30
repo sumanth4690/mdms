@@ -261,6 +261,7 @@ export const fetchLast30DaysActiveMetersThird = () => {
 }
 
 export const fetchLast30DaysActiveMetersAll9May = async () => {
+	debugger
 
 	/* -----------------------!P------------------------ */
 
@@ -5004,11 +5005,11 @@ export const fetchTamperEventCount = async () => {
 	const data = res.data.data
 	const restore = data.find(
 		(item) => item.occurence_or_restore_or_na === 'Restore'
-	).count.occurence_or_restore_or_na
+	)?.count.occurence_or_restore_or_na
 	const occurence = data.find(
 		(item) => item.occurence_or_restore_or_na === 'Occurrence'
-	).count.occurence_or_restore_or_na
-	const na = data.find((item) => item.occurence_or_restore_or_na === 'na').count
+	)?.count.occurence_or_restore_or_na
+	const na = data.find((item) => item.occurence_or_restore_or_na === 'na')?.count
 		.occurence_or_restore_or_na
 	return Math.abs(Number(occurence - restore + na))
 }

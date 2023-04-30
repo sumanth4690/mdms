@@ -20,7 +20,7 @@ import {
 	fetchTotalDeployedMeters,
 	fetchTotalInstalledMeters,
 	fetchTotalMeterCount,
-	fetchYtd,
+	// fetchYtd,
 } from 'api/services/dashboard'
 import {
 	fetchLatestDateTimeForDailyLoadSync,
@@ -78,43 +78,44 @@ const Dashboard = () => {
 		{data: installedMeters, error: error3, isLoading: loading3},
 		{data: totalMeters, error: error5, isLoading: loading5},
 		// {data: powerOutageCount, error: error6, isLoading: loading6},
-		{data: mtd, error: error7, isLoading: loading7},
-		{data: ytd, error: error8, isLoading: loading8},
-		{data: tamperCount, error: error9, isLoading: loading9},
+		// {data: mtd, error: error7, isLoading: loading7},
+		// {data: ytd, error: error8, isLoading: loading8},
+		// {data: tamperCount, error: error9, isLoading: loading9},
 		{data: meterLatestSycTime, error: error10, isLoading: loading10},
-		{data: dailyLoadSyncTime, error: error11, isLoading: loading11},
-		{data: powerEventsAndTampers, error: error12, isLoading: loading12},
-		{data: inactiveSyncTime, error: error13, isLoading: loading13},			
+		// {data: dailyLoadSyncTime, error: error11, isLoading: loading11},
+		// {data: powerEventsAndTampers, error: error12, isLoading: loading12},
+		// {data: inactiveSyncTime, error: error13, isLoading: loading13},			
 	] = useQueries([
 		{queryKey: 'totalDeployedMetrics', queryFn: fetchTotalDeployedMeters},
 		{queryKey: 'installedMeters', queryFn: fetchTotalInstalledMeters},
 		{queryKey: 'totalMeters', queryFn: fetchTotalMeterCount},
 		// {queryKey: 'powerOutageCount', queryFn: fetchPowerOutageCount},
-		{queryKey: 'mtd', queryFn: fetchMtd},
-		{queryKey: 'ytd', queryFn: fetchYtd},
-		{queryKey: 'tamperCount', queryFn: fetchTamperEventCount},
+		// {queryKey: 'mtd', queryFn: fetchMtd},
+		// {queryKey: 'ytd', queryFn: fetchYtd},
+		// {queryKey: 'tamperCount', queryFn: fetchTamperEventCount},
 		{
 			queryKey: 'latestSyncTimeForMeters',
 			queryFn: fetchLatestDateTimeForDataSyncForMeters,
 		},
-		{
-			queryKey: 'latestSyncTimeForDailyLoad',
-			queryFn: fetchLatestDateTimeForDailyLoadSync,
-		},
-		{
-			queryKey: 'latestSyncTimeForPowerEventsAndTampers',
-			queryFn: fetchPowerOutageAndTampersLatestSync,
-		},
-		{
-			queryKey: 'syncTimeForInactiveMeters',
-			queryFn: fetchSyncTimeForInactiveMeters,
-		}
+		// {
+		// 	queryKey: 'latestSyncTimeForDailyLoad',
+		// 	queryFn: fetchLatestDateTimeForDailyLoadSync,
+		// },
+		// {
+		// 	queryKey: 'latestSyncTimeForPowerEventsAndTampers',
+		// 	queryFn: fetchPowerOutageAndTampersLatestSync,
+		// },
+		// {
+		// 	queryKey: 'syncTimeForInactiveMeters',
+		// 	queryFn: fetchSyncTimeForInactiveMeters,
+		// }
 	])
 	
 	const [totalmeter, setTotalmeter] = useState<any>("");
 	const [instalm, setInstalm] = useState<any>("");
 	const [totalcom, setTotalcom] = useState<any>("");	
 	const [installcom, setInstallcom] = useState(0);
+	const [ tamperCount, setTamperCount ] = useState<any>('')
 
 	const [powerconsingle, setPowerconsingle] = useState<any>(0);
 	
@@ -123,57 +124,66 @@ const Dashboard = () => {
 	const [latestThirdTime, setLatestThirdTime] = useState('')
 	const [powerConsumtionSingleMonth, setPowerConsumtionSingleMonth] = useState<any>('')
 	const [powerConsumtionThreeMonth, setPowerConsumtionThreeMonth] = useState<any>('')
+
+	useEffect(()=>{
+		getamperEventCount()
+	},[])
+
+	const getamperEventCount = async () => {
+		const res = await fetchTamperEventCount()
+		setTamperCount(res)
+	}
 	
-	const [count, setCount] = useState({
-		active: 0,
-		inActive: 0,
-	})
+	// const [count, setCount] = useState({
+	// 	active: 0,
+	// 	inActive: 0,
+	// })
 
-	const {
-		data: areas,
-		error: areasError,
-		isLoading: areasLoading,
-		mutate: mutateAreas,
-	} = useMutation('areas', fetchAreas)
+	// const {
+	// 	data: areas,
+	// 	error: areasError,
+	// 	isLoading: areasLoading,
+	// 	mutate: mutateAreas,
+	// } = useMutation('areas', fetchAreas)
 
-	const {
-		data: sections,
-		isLoading: sectionsLoading,
-		error: sectionsError,
-	} = useQuery('sections', fetchSections)
+	// const {
+	// 	data: sections,
+	// 	isLoading: sectionsLoading,
+	// 	error: sectionsError,
+	// } = useQuery('sections', fetchSections)
 
-	const {
-		data: locations,
-		isLoading: mapDataLoading,
-		error: mapDataError,
-		mutate,
-	} = useMutation('mapData', fetchMapData, {
-		onSuccess: (locations) => {
-			setCount({
-				active: locations?.activeCount,
-				inActive: locations?.inactiveCount,
-			})
-		},
-	})
+	// const {
+	// 	data: locations,
+	// 	isLoading: mapDataLoading,
+	// 	error: mapDataError,
+	// 	mutate,
+	// } = useMutation('mapData', fetchMapData, {
+	// 	onSuccess: (locations) => {
+	// 		setCount({
+	// 			active: locations?.activeCount,
+	// 			inActive: locations?.inactiveCount,
+	// 		})
+	// 	},
+	// })
 	
-	const [state, setState] = useState({
-		area: '',
-		section: '',
-		meterState: 'all',
-	})
+	// const [state, setState] = useState({
+	// 	area: '',
+	// 	section: '',
+	// 	meterState: 'all',
+	// })
 	
 	const [phase, setPhase] = useState<any>({
 		phase: 'all',
 	})
 	
 	//console.log('ARUNNEW DATA'+powerConsumptionMonthSingle.data.sum.energy_kwh_import);
-	const handleChange = (name, value) => {
-		setState((prev) => ({...prev, [name]: value}))
-	}
+	// const handleChange = (name, value) => {
+	// 	setState((prev) => ({...prev, [name]: value}))
+	// }
 
-	useEffect(() => {
-		mutate({})
-	}, [])
+	// useEffect(() => {
+	// 	mutate({})
+	// }, [])
 
 	
 	useEffect(() => {
@@ -223,17 +233,17 @@ const Dashboard = () => {
 	
 	const meterLatest = meterLatestSycTime?.data?.data[0].latest_sync_date;
 	
-	const commundate = inactiveSyncTime?.data?.data[0].date_updated;
+	// const commundate = inactiveSyncTime?.data?.data[0].date_updated;
 	const meterLatestSyc = add(new Date(meterLatest), {
 		hours: 5,
 		minutes: 30,
 	})
 	// console.log(meterLatestSyc,"dfskdfjksdfjkdsfj");
 	
-	const constcommunicationdate = add(new Date(commundate), {
-		hours: 5,
-		minutes: 30,
-	})	
+	// const constcommunicationdate = add(new Date(commundate), {
+	// 	hours: 5,
+	// 	minutes: 30,
+	// })	
 	let selectedVal = 'all';
 	
 	const handleUpdateKpData = (ev) => {
@@ -331,23 +341,25 @@ const Dashboard = () => {
 		loading3 ||
 		loading5 ||
 		// loading6 ||
-		loading7 ||
-		loading8 ||
-		loading9 ||
-		loading10 ||
-		loading11 ||
-		loading12 ||
-		loading13
+		// loading7 ||
+		// loading8 ||
+		// loading9 ||
+		loading10
+		// loading11 ||
+		// loading12 ||
+		// loading13
 	if (isLoading)
 		return (
 			<div className='flex items-center justify-center w-full h-screen'>
 				<CircularProgress />
 			</div>
 		)
-	if (error2 || error3 || error7) return <p>Error</p>
+	if (error2 || error3 ){ 
+		return <p>Error</p>
+	}
 	
 	const totalcommunitatio = (totalMeters?.data?.data[0]?.count?.meter_serial_number + totalMeters?.data?.data[1]?.count?.meter_serial_number) || '0';
-	const nottotalcommunication = (installedMeters?.data?.data[0]?.count?.meter_serial_number - totalMeters?.data?.data[0]?.count?.meter_serial_number + Number(installedMeters?.data?.data[1]?.count?.meter_serial_number - totalMeters?.data?.data[1]?.count?.meter_serial_number) || '-');
+	// const nottotalcommunication = (installedMeters?.data?.data[0]?.count?.meter_serial_number - totalMeters?.data?.data[0]?.count?.meter_serial_number + Number(installedMeters?.data?.data[1]?.count?.meter_serial_number - totalMeters?.data?.data[1]?.count?.meter_serial_number) || '-');
 		
 	// console.log("nottotalcommunication",nottotalcommunication)
 	// const totalamount = ((totalcom)?totalcom:(totalMeters?.data?.data[0]?.count?.meter_serial_number + totalMeters?.data?.data[1]?.count?.meter_serial_number));

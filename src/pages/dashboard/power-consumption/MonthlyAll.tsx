@@ -71,16 +71,16 @@ const MonthlyAll = () => {
 	}
 
 	const Card = styled(MuiCard)(spacing);
-	const {
-		data: latestTime,
-		error: error4,
-		isLoading: loading4,
-	  } = useQuery('datetime', fetchLatestDateTimeForDataSync)
-	const date = latestTime?.data?.data[0].server_date_time
-	const addedDate = add(new Date(date), {
-	  hours: 5,
-	  minutes: 30,
-	})
+	// const {
+	// 	data: latestTime,
+	// 	error: error4,
+	// 	isLoading: loading4,
+	//   } = useQuery('datetime', fetchLatestDateTimeForDataSync)
+	// const date = latestTime?.data?.data[0].server_date_time
+	// const addedDate = add(new Date(date), {
+	//   hours: 5,
+	//   minutes: 30,
+	// })
 
 
 	const CardContent = styled(MuiCardContent)`

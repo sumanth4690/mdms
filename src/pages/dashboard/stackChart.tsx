@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { withTheme } from "styled-components/macro";
 import Chart from "react-chartjs-2";
 import { MoreVertical } from "react-feather";
@@ -38,14 +38,24 @@ const ChartWrapper = styled.div`
 const StackedBarApexes = ({ theme }) => {
   const firstDatasetColor = '#407ddd';
   const secondDatasetColor = '#dee2e6';
+  const [ Last30DaysActiveMetersAll9May, setLast30DaysActiveMetersAll9May ] = useState<any>('')
 
-  const { data, isLoading, error } = useQuery(
-    ['fetchLast30DaysActiveMetersAll'],
-    fetchLast30DaysActiveMetersAll9May
-  )
+  // const { data, isLoading, error } = useQuery(
+  //   ['fetchLast30DaysActiveMetersAll'],
+  //   fetchLast30DaysActiveMetersAll9May
+  // )
+  useEffect(()=>{
+		getLast30DaysActiveMetersAll9May()
+	},[])
 
-  let category = data?.category;
-  let series= data?.series;
+	const getLast30DaysActiveMetersAll9May = async () => {
+    debugger
+		const res = await fetchLast30DaysActiveMetersAll9May()
+		setLast30DaysActiveMetersAll9May(res)
+	}
+
+  let category = Last30DaysActiveMetersAll9May?.category;
+  let series= Last30DaysActiveMetersAll9May?.series;
   // console.log("1/1/1//1/1/1/1",data)
   //let phase3 = data?.series?.series[1].data;
   // console.log("--------------",categories);
