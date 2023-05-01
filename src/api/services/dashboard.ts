@@ -261,7 +261,6 @@ export const fetchLast30DaysActiveMetersThird = () => {
 }
 
 export const fetchLast30DaysActiveMetersAll9May = async () => {
-	debugger
 
 	/* -----------------------!P------------------------ */
 

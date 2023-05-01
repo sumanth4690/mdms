@@ -49,7 +49,6 @@ const StackedBarApexes = ({ theme }) => {
 	},[])
 
 	const getLast30DaysActiveMetersAll9May = async () => {
-    debugger
 		const res = await fetchLast30DaysActiveMetersAll9May()
 		setLast30DaysActiveMetersAll9May(res)
 	}
