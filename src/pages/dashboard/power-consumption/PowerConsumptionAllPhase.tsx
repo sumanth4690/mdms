@@ -10,7 +10,7 @@ const PowerConsumptionAllPhase = () => {
 	const {data, error, isLoading} = useQuery('fetchPower24all', fetchPower24all)
 	const xaxis = data?.map((item) => item?.timestamp)
 	const chartData = data?.map((item) => (item?.value / 1000)?.toFixed(2))
-    console.log("24 hrs data All phase ",chartData)
+    // console.log("24 hrs data All phase ",chartData)
 	
 	if (isLoading) return <CircularProgress />
 	if (error) return <div>Server Error</div>

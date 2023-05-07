@@ -62,7 +62,7 @@ const MetersTable = () => {
 					<section className='bg-white rounded-xl shadow-md p-3 min-h-[500px]'>
 						<div className=''>
 							<div className='text-sm-count text-right'>
-								<Typography>Total Count: {data?.data?.meta?.filter_count}</Typography>
+								<Typography>Total Count: {data?.data?.data?.length}</Typography>
 							</div>
 							<Table
 								columns={columns}

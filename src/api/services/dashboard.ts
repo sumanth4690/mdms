@@ -3336,8 +3336,8 @@ export const fetchPower24all = async () => {
 	let result = (res1p.data.data)
 	let allSum = 0;
 	let _newArr = [];
-	console.log("1p data", result)
-	console.log("3p data", res3p.data.data)
+	// console.log("1p data", result)
+	// console.log("3p data", res3p.data.data)
 
 	result.map(function (key, value) {
 		// console.log("3p data result : ",res3p.data.data[value].sum.block_energy_Wh_import)
@@ -4636,7 +4636,7 @@ export const fetchPowerConsumptionInMonthAll = async ({
 			i += 1;
 		}
 	}
-	console.log("values", values)
+	// console.log("values", values)
 
 
 	const arr = [];

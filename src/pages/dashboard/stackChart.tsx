@@ -67,6 +67,14 @@ const StackedBarApexes = ({ theme }) => {
     isLoading: loading1
   } = useQuery('fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle',fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle);
   // console.log("response data",resTime)
+  let largest = 10
+  if(series){
+    for (var i = 0; i < series.length; i++) {
+      if (largest < series[i] ) {
+          largest = Math.trunc(series[i]);
+      }
+    }
+  }
 
   const datafinal = {
     labels: category,
@@ -105,7 +113,7 @@ const StackedBarApexes = ({ theme }) => {
     scales: {
       y: {
         min: 1,
-        max: 10,
+        max: largest + 1,
         grid: {
           display: false,
         },

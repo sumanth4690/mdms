@@ -91,7 +91,7 @@ const DoughnutChartAll = ({ theme }) => {
 	const [state, setState] = useState<{ year: number | string }>({
 		year: new Date().getFullYear(),
 	})
-	// const [latestTime, setLatestTime] = useState('')
+	const [latestTime, setLatestTime] = useState('')
 
 	const {
 		data: res,
@@ -100,17 +100,17 @@ const DoughnutChartAll = ({ theme }) => {
 	} = useMutation('fetchPowerConsumptionAll', fetchPowerConsumptionAll)
 
 
-	// useEffect(() => {
-	// 	getLatestTime()
-	// 	mutate({
-	// 		year: state.year,
-	// 	})
-	// }, [])
+	useEffect(() => {
+		getLatestTime()
+		mutate({
+			year: state.year,
+		})
+	}, [])
 
-	// const getLatestTime = async () => {
-	// 	const res = await fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle()
-	// 	setLatestTime(res)
-	// }
+	const getLatestTime = async () => {
+		const res = await fetchLatestTimeForPowerConsumptionMonthlyAndYearlyDonutSingle()
+		setLatestTime(res)
+	}
 
 	const {
 		data: resTime,
@@ -124,7 +124,6 @@ const DoughnutChartAll = ({ theme }) => {
 		e.preventDefault()
 		mutate({ year: state.year })
 	}
-
 	const data = res?.data?.data
 
 	const values = data?.map((item) =>
@@ -165,12 +164,13 @@ const DoughnutChartAll = ({ theme }) => {
 		},
 		cutout: "85%",
 	};
-	if (isLoading)
+	if (isLoading){
 	return (
 		<Card mb={8}>
 			<CardContent><CircularProgress /></CardContent>
 		</Card>
 	)
+	}
 	return (
 		<Card mb={8}>
 			<Grid item className="donutleft">

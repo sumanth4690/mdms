@@ -68,6 +68,14 @@ const {
   const xaxis = Last30DaysActiveMetersSingle?.data?.data?.map((item) =>
      arr.push(`${item.source_timestamp_day}/${item.source_timestamp_month}/${item.source_timestamp_year}`)
   )
+  let largest = 10
+  if(values){
+    for (var i = 0; i < values.length; i++) {
+      if (largest < values[i] ) {
+          largest = Math.trunc(values[i]);
+      }
+    }
+  }
 
   const datafinal = {
     labels: arr,
@@ -96,7 +104,7 @@ const {
     scales: {
       y: {
         min: 1,
-        max: 10,
+        max: largest + 1,
         grid: {
           display: false,
         },

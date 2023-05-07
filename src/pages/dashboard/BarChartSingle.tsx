@@ -65,12 +65,14 @@ const BarChartSingle = ({ theme }) => {
   const values = Last30DaysActiveMetersSingle?.data?.data?.map((item) =>
     (`${item.countDistinct.meter_serial_number}`)
   )
-
-
-
-
-
-
+  let largest = 10
+  if(values){
+    for (var i = 0; i < values.length; i++) {
+      if (largest < values[i] ) {
+          largest = Math.trunc(values[i]);
+      }
+    }
+  }
 
 // console.log(values);
   const arr=[];
@@ -114,7 +116,7 @@ const datafinal = {
     scales: {
       y: {
         min: 1,
-        max: 10,
+        max: largest + 1,
         grid: {
           display: false,
         },
